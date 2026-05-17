@@ -2,5 +2,79 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
+        <VBox id="idVBoxCart">
+<Table id="idProductsTable"
+    items="{
+        path: '/Products',
+        sorter: {
+            path: 'ProductName'
+        },
+        filters: [
+            {
+                path: 'Discontinued',
+                operator: 'EQ',
+                value1: false
+            }
+        ]
+    }">
+            <headerToolbar>
+                <OverflowToolbar id="idOFT">
+                    <content>
+                        <Title
+                            id="idTableNorthwind"
+                            text="{i18n>northwindTblTitle}" />
+
+                        <ToolbarSpacer id="idTSpacer"/>
+
+                    </content>
+                </OverflowToolbar>
+            </headerToolbar>
+<columns>
+    <Column id="idCol1">
+        <header>
+            <Text id="idColText1" text="{i18n>productHeader}" />
+        </header>
+    </Column>
+
+    <Column id="idCol2">
+        <header>
+            <Text id="idColText2" text="{i18n>supplierHeader}" />
+        </header>
+    </Column>
+
+    <Column id="idCol3">
+        <header>
+            <Text id="idColText3" text="{i18n>priceColText}" />
+        </header>
+    </Column>
+</columns>
+
+<items>
+    <ColumnListItem id="idColListItem1" vAlign="Middle">
+				<cells >
+					<ObjectIdentifier id = "idObjIdProductName"
+						title="{ProductName}"
+                        text = "{ProductID}"     
+                        />
+
+					<Text id = "idObjIdProduct"
+						text="{SupplierID}"/>
+                    <ObjectIdentifier id="idObjNumPrice"
+                        title="{
+                            parts: [
+                                { path: 'UnitPrice' },
+                                { path: 'i18n>currencyCode' }
+                            ],
+                            type: 'sap.ui.model.type.Currency',
+                            formatOptions: { showMeasure: true }
+                        }"
+                        text="{QuantityPerUnit}"
+                        />
+				</cells>
+    </ColumnListItem>
+</items>
+
+        </Table>
+    </VBox>
     </Page>
 </mvc:View>
